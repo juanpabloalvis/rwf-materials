@@ -3,12 +3,8 @@ FEATURES := $(wildcard packages/features/*)
 BUILD-RUNNER := packages/fav_qs_api packages/key_value_storage
 
 print:
-	for feature in $(FEATURES); do \
-		echo $${feature} ; \
-	done
-	for package in $(PACKAGES); do \
-		echo $${package} ; \
-	done
+	for /D %%F in ("packages/features/*") do (cd "%cd%\packages\features\%%F" & echo %%F)
+	for /D %%P in ("packages/*") do (cd "%cd%\packages\%%P" & echo %%P)
 
 pods-clean:
 	rm -Rf ios/Pods ; \
@@ -21,33 +17,15 @@ pods-clean:
 
 get:
 	flutter pub get
-	for feature in $(FEATURES); do \
-		cd $${feature} ; \
-		echo "Updating dependencies on $${feature}" ; \
-		flutter pub get ; \
-		cd ../../../ ; \
-	done
-	for package in $(PACKAGES); do \
-		cd $${package} ; \
-		echo "Updating dependencies on $${package}" ; \
-		flutter pub get ; \
-		cd ../../ ; \
-	done
+	for /D %%F in ("packages/features/*") do (cd "%cd%\packages\features\%%F" & echo Updating dependencies on %%F & flutter pub get)
+	for /D %%P in ("packages/*") do (cd "%cd%\packages\%%P" & echo Updating dependencies on %%P & flutter pub get)
 
 upgrade:
+
 	flutter pub upgrade
-	for feature in $(FEATURES); do \
-		cd $${feature} ; \
-		echo "Updating dependencies on $${feature}" ; \
-		flutter pub upgrade ; \
-		cd ../../../ ; \
-	done
-	for package in $(PACKAGES); do \
-		cd $${package} ; \
-		echo "Updating dependencies on $${package}" ; \
-		flutter pub upgrade ; \
-		cd ../../ ; \
-	done
+	for /D %%F in ("packages/features/*") do (cd "%cd%\packages\features\%%F" & echo Updating dependencies on %%F & flutter pub upgrade)
+	for /D %%P in ("packages/*") do (cd "%cd%\packages\%%P" & echo Updating dependencies on %%P & flutter pub upgrade)
+
 
 lint:
 	flutter analyze
@@ -57,53 +35,18 @@ format:
 
 testing:
 	flutter test
-	for feature in $(FEATURES); do \
-		cd $${feature} ; \
-		echo "Running test on $${feature}" ; \
-		flutter test ; \
-		cd ../../../ ; \
-	done
-	for package in $(PACKAGES); do \
-		cd $${package} ; \
-		echo "Running test on $${package}" ; \
-		flutter test ; \
-		cd ../../ ; \
-	done
+	for /D %%F in ("packages/features/*") do (cd "%cd%\packages\features\%%F" & echo Running test on %%F & flutter pub test)
+	for /D %%P in ("packages/*") do (cd "%cd%\packages\%%P" & echo Running test on %%P & flutter pub test)
 
 test-coverage:
 	flutter test --coverage
-	for feature in $(FEATURES); do \
-		cd $${feature} ; \
-		echo "Running test on $${feature}" ; \
-		flutter test --coverage ; \
-		cd ../../../ ; \
-	done
-	for package in $(PACKAGES); do \
-		cd $${package} ; \
-		echo "Running test on $${package}" ; \
-		flutter test --coverage ; \
-		cd ../../ ; \
-	done
+	for /D %%F in ("packages/features/*") do (cd "%cd%\packages\features\%%F" & echo Running test on %%F & flutter test --coverage)
+	for /D %%P in ("packages/*") do (cd "%cd%\packages\%%P" & echo Running test on %%P & flutter test --coverage)
 
 clean:
 	flutter clean
-	for feature in $(FEATURES); do \
-		cd $${feature} ; \
-		echo "Running clean on $${feature}" ; \
-		flutter clean ; \
-		cd ../../../ ; \
-	done
-	for package in $(PACKAGES); do \
-		cd $${package} ; \
-		echo "Running clean on $${package}" ; \
-		flutter clean ; \
-		cd ../../ ; \
-	done
+	for /D %%F in ("packages/features/*") do (cd "%cd%\packages\features\%%F" & echo Running clean on %%F & flutter clean)
+	for /D %%P in ("packages/*") do (cd "%cd%\packages\%%P" & echo Running clean on %%P & flutter clean)
 
 build-runner:
-	for package in $(BUILD-RUNNER); do \
-		cd $${package} ; \
-		echo "Running build-runner on $${package}" ; \
-		flutter pub run build_runner build --delete-conflicting-outputs ; \
-		cd ../../ ; \
-	done
+	for /D %%P in ("packages/*") do (cd "%cd%\packages\%%P" & echo Running build-runner on %%P & flutter pub run build_runner build --delete-conflicting-outputs)

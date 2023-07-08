@@ -37,7 +37,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
-DEBUG=false
+DEBUG=true
 if [ "$DEBUG" = true ]; then
 	STD_OUT=/dev/tty
 else
@@ -55,7 +55,7 @@ SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 WANTED_SUBFOLDER_1='.idea'
 WANTED_SUBFOLDER_2='.vscode'
 
-WANTED_SUBFOLDER_3='android/app/src/google-services.json'
+WANTED_SUBFOLDER_3='android/app/google-services.json'
 WANTED_SUBFOLDER_4='ios/Runner/GoogleService-Info.plist'
 
 ARR_WANTED=( 
@@ -126,7 +126,7 @@ FOLDERS=$(printf "${ALL_ROOT}" | grep -v $(printf ${SCRIPT_DIR}))
 
 	# Print an error only if we're missing both
 	ERR_IF_BOTH_1=(
-		"/src/google-services.json$"
+		"/google-services.json$"
 		"/Runner/GoogleService-Info.plist$"
 	)
 	BOTH_MISSING_1=true

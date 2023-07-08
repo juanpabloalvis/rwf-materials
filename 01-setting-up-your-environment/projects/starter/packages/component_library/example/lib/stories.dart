@@ -328,7 +328,7 @@ List<Story> getStories(WonderThemeData theme) {
     ),
     Story.simple(
       name: 'Search Bar',
-      child: const SearchBar(),
+      child: const SearchBarCustom(),
     ),
     Story.simple(
       name: 'Row App Bar',

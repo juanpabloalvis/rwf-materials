@@ -326,10 +326,10 @@ List<Story> getStories(WonderThemeData theme) {
         ),
       ),
     ),
-    Story.simple(
-      name: 'Search Bar',
-      child: const SearchBar(),
-    ),
+    // Story.simple(
+    //   name: 'Search Bar',
+    //   child: const SearchBar(),
+    // ),
     Story.simple(
       name: 'Row App Bar',
       child: const RowAppBar(
